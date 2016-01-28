@@ -1,7 +1,9 @@
 package com.pchab.android.downloaderplugin;
 
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
@@ -9,9 +11,11 @@ import android.preference.PreferenceManager;
 import android.net.Uri;
 import android.util.Log;
 
+import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONException;
 import java.util.HashMap;
 
 public class Downloader extends CordovaPlugin {
@@ -21,18 +25,20 @@ public class Downloader extends CordovaPlugin {
     private static final String TAG = "DownloaderPlugin";
 
     private DownloadManager downloadManager;
-    private HashMap<long, Download> downloadMap;
+    private HashMap<Long, Download> downloadMap;
 
     @Override
     protected void pluginInitialize()
     {
         Log.d(TAG, "PluginInitialize");
 
-        this.downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        this.downloadMap = new HashMap<>();
+        Activity cordovaActivity = this.cordova.getActivity();
 
-        IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
-        registerReceiver(downloadReceiver, intentFilter);
+        downloadManager = (DownloadManager) cordovaActivity.getSystemService(Context.DOWNLOAD_SERVICE);
+        downloadMap = new HashMap();
+
+        // Register receiver for Notification actions
+        cordovaActivity.registerReceiver(downloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 
     @Override
@@ -40,16 +46,35 @@ public class Downloader extends CordovaPlugin {
 
         Log.d(TAG, "CordovaPlugin: execute " + action);
 
-        try {
-
             if (ACTION_DOWNLOAD.equals(action)) {
 
                 Log.d(TAG, "CordovaPlugin: load " + action);
-                this.download(args, callbackContext);
+                return download(args, callbackContext);
 
             }
 
-            return true;
+            return false;
+
+
+    }    
+
+    private boolean download(JSONArray args, CallbackContext callbackContext)
+    {
+        Log.d(TAG, "CordovaPlugin: " + ACTION_DOWNLOAD);
+
+        try {
+
+            JSONObject arg_object = args.getJSONObject(0);
+
+            Uri uri = Uri.parse(arg_object.getString("url"));
+            Download mDownload = new Download(arg_object.getString("path"), callbackContext);
+
+            DownloadManager.Request request = new DownloadManager.Request(uri);
+
+            // save the download
+            downloadMap.put(downloadManager.enqueue(request), mDownload);
+
+        return true;
 
         } catch (Exception e) {
 
@@ -58,22 +83,6 @@ public class Downloader extends CordovaPlugin {
 
             return false;
         }
-    }    
-
-    private void download(JSONArray args, CallbackContext callbackContext)
-    {
-        Log.d(TAG, "CordovaPlugin: " + ACTION_DOWNLOAD);
-
-        JSONObject arg_object = args.getJSONObject(0);
-
-        Uri uri = Uri.parse(arg_object.getString("url"));
-        Download mDownload = new Download(arg_object.getString("path"), callbackContext);
-
-        DownloadManager.Request request = new DownloadManager.Request(uri);
-        long downloadId = this.downloadManager.enqueue(request);
-
-        // save the download
-        this.downloadMap.put(downloadId, mDownload);
     }
 
     private BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
@@ -82,15 +91,15 @@ public class Downloader extends CordovaPlugin {
         public void onReceive(Context context, Intent intent) {
 
             DownloadManager.Query query = new DownloadManager.Query();
-            long downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0);
+            Long downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0);
             query.setFilterById(downloadId);
-            Cursor cursor = this.downloadManager.query(query);
+            Cursor cursor = downloadManager.query(query);
 
             if (cursor.moveToFirst()){
 
                 //Retrieve the saved download
-                Download currentDownload = this.downloadMap.get(downloadId);
-                this.downloadMap.remove(currentDownload);
+                Download currentDownload = downloadMap.get(downloadId);
+                downloadMap.remove(currentDownload);
 
                 int columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
                 int status = cursor.getInt(columnIndex);

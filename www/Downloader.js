@@ -11,7 +11,7 @@ function checkEvent(event) {// add namespace ?
 exports.Downloader = {
     download: function (arguments, successCallback, errorCallback) {
         console.group("Downloader::download");
-        console.log(infos);
+        console.log(arguments);
         console.groupEnd();
 
 		cordova.exec(
