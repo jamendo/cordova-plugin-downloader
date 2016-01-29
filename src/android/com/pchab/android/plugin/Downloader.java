@@ -124,7 +124,7 @@ public class Downloader extends CordovaPlugin {
                         try {
                             JSONObject entry = new JSONObject();
                             entry.put("folder", Environment.DIRECTORY_DOWNLOADS);
-                            entry.put("path", currentDownload.path);
+                            entry.put("file", currentDownload.path);
                             currentDownload.callbackContext.success(entry);
                         } catch (Exception e) {
                             System.err.println("Exception: " + e.getMessage());
