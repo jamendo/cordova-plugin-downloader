@@ -121,10 +121,15 @@ public class Downloader extends CordovaPlugin {
                 
                 switch (status) {
                     case DownloadManager.STATUS_SUCCESSFUL:
-                        JSONObject entry = new JSONObject();
-                        entry.put("folder", Environment.DIRECTORY_DOWNLOADS);
-                        entry.put("path", currentDownload.path);
-                        currentDownload.callbackContext.success(entry);
+                        try {
+                            JSONObject entry = new JSONObject();
+                            entry.put("folder", Environment.DIRECTORY_DOWNLOADS);
+                            entry.put("path", currentDownload.path);
+                            currentDownload.callbackContext.success(entry);
+                        } catch (Exception e) {
+                            System.err.println("Exception: " + e.getMessage());
+                            callbackContext.error(e.getMessage());
+                        }
                         break;
                     case DownloadManager.STATUS_FAILED:
                         currentDownload.callbackContext.error(reason);
