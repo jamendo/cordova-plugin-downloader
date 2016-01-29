@@ -22,13 +22,9 @@
     <engine name="cordova" version=">=3.0.0" />
   </engines>
 
-  <!-- dependencies -->
-  <dependency id="org.apache.cordova.device" />
-
   <!-- js -->
   <js-module src="www/Downloader.js" name="Downloader">
-    <clobbers target="cordova.plugins" />
-    <clobbers target="plugins" />
+    <clobbers target="window.plugins.cordova" />
   </js-module>
 
   <!-- android -->
