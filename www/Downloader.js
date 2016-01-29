@@ -1,7 +1,7 @@
 
 var eventCallbackList = {};
 
-function checkEvent(event) {// add namespace ?
+function checkEvent(event) {
     if (event in eventCallbackList) {
         return;
     }

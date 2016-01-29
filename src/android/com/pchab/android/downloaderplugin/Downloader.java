@@ -1,4 +1,4 @@
-package com.pchab.android.downloaderplugin;
+package com.pchab.android.plugin;
 
 import android.app.Activity;
 import android.app.DownloadManager;

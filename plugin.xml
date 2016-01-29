@@ -24,21 +24,22 @@
 
   <!-- js -->
   <js-module src="www/Downloader.js" name="Downloader">
-    <clobbers target="window.plugins" />
+    <clobbers target="cordova.plugins" />
+    <clobbers target="plugins" />
   </js-module>
 
   <!-- android -->
   <platform name="android">
 
     <!-- <source-file
-			src="src/android/libs/support-v4-19.0.0.jar" target-dir="libs/" /> -->
+      src="src/android/libs/support-v4-19.0.0.jar" target-dir="libs/" /> -->
     <source-file
-        src="src/android/com/pchab/android/downloaderplugin/Downloader.java"
-        target-dir="src/com/pchab/android/downloaderplugin" />
+        src="src/android/com/pchab/android/plugin/Downloader.java"
+        target-dir="src/com/pchab/android/plugin" />
 
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="Downloader">
-        <param name="android-package" value="com.pchab.android.downloaderplugin.Downloader" />
+        <param name="android-package" value="com.pchab.android.plugin.Downloader" />
       </feature>
     </config-file>
 
