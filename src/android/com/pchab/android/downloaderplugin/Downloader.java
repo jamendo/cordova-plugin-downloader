@@ -128,7 +128,7 @@ public class Downloader extends CordovaPlugin {
                             currentDownload.callbackContext.success(entry);
                         } catch (Exception e) {
                             System.err.println("Exception: " + e.getMessage());
-                            callbackContext.error(e.getMessage());
+                            currentDownload.callbackContext.error(e.getMessage());
                         }
                         break;
                     case DownloadManager.STATUS_FAILED:
