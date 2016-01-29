@@ -3,17 +3,17 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="com.pchab.cordova.plugin.downloader"
-        version="0.0.1">
+        version="0.1.0">
 
   <name>Downloader</name>
 
-  <description>Todo</description>
+  <description>Cordova plugin for downloading feature in jamendo music app</description>
 
   <repo>https://github.com/pchab/cordova-plugin-downloader.git</repo>
 
   <keywords>music, download, mobile</keywords>
 
-  <license>Apache 2.0</license>
+  <license>Apache 2.0 License</license>
 
   <author>Pierre Chabardes</author>
 
