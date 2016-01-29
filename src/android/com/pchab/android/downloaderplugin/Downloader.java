@@ -7,8 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
-import android.preference.PreferenceManager;
 import android.net.Uri;
+import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
@@ -24,6 +25,7 @@ public class Downloader extends CordovaPlugin {
 
     private static final String TAG = "DownloaderPlugin";
 
+    private Activity cordovaActivity;
     private DownloadManager downloadManager;
     private HashMap<Long, Download> downloadMap;
 
@@ -32,7 +34,7 @@ public class Downloader extends CordovaPlugin {
     {
         Log.d(TAG, "PluginInitialize");
 
-        Activity cordovaActivity = this.cordova.getActivity();
+        cordovaActivity = this.cordova.getActivity();
 
         downloadManager = (DownloadManager) cordovaActivity.getSystemService(Context.DOWNLOAD_SERVICE);
         downloadMap = new HashMap();
@@ -65,11 +67,22 @@ public class Downloader extends CordovaPlugin {
         try {
 
             JSONObject arg_object = args.getJSONObject(0);
+            String path = arg_object.getString("path");
 
             Uri uri = Uri.parse(arg_object.getString("url"));
-            Download mDownload = new Download(arg_object.getString("path"), callbackContext);
+            Download mDownload = new Download(path, callbackContext);
 
             DownloadManager.Request request = new DownloadManager.Request(uri);
+            //Restrict the types of networks over which this download may proceed.
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+            //Set whether this download may proceed over a roaming connection.
+            request.setAllowedOverRoaming(true);
+            //Set the title of this download, to be displayed in notifications (if enabled).
+            request.setTitle(path);
+            //Set a description of this download, to be displayed in notifications (if enabled)
+            request.setDescription("Jamendo Music");
+            //Set the local destination for the downloaded file to a path within the application's external files directory
+            request.setDestinationInExternalFilesDir(cordovaActivity, Environment.DIRECTORY_DOWNLOADS, path);
 
             // save the download
             downloadMap.put(downloadManager.enqueue(request), mDownload);

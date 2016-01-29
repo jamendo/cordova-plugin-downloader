@@ -25,15 +25,6 @@
   <!-- dependencies -->
   <dependency id="org.apache.cordova.device" />
 
-  <!-- info -->
-  <info>
-    This is still in development and testing.
-    I plan to support iOS, Android, WP8 and Windows. For others platform, I don't have any device for test directly.
-    So if somebody needs other one, your support is needed.
-
-    Thank you!
-  </info>
-
   <!-- js -->
   <js-module src="www/Downloader.js" name="Downloader">
     <clobbers target="cordova.plugins" />
