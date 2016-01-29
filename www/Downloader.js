@@ -14,13 +14,13 @@ var Downloader = {
     }
 };
 
-Downloader.install = function () {
+function install() {
     if (!window.plugins) {
         window.plugins = {};
     }
 
-    window.plugins.toast = new Downloader();
+    window.plugins.Downloader = Downloader;
     return window.plugins.Downloader;
 };
 
-cordova.addConstructor(Downloader.install);
+cordova.addConstructor(install);
