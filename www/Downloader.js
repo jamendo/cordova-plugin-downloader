@@ -1,14 +1,4 @@
-
-var eventCallbackList = {};
-
-function checkEvent(event) {
-    if (event in eventCallbackList) {
-        return;
-    }
-    eventCallbackList[event] = [];
-}
-
-exports.Downloader = {
+var Downloader = {
     download: function (arguments, successCallback, errorCallback) {
         console.group("Downloader::download");
         console.log(arguments);
@@ -23,3 +13,14 @@ exports.Downloader = {
 		);
     }
 };
+
+Downloader.install = function () {
+    if (!window.plugins) {
+        window.plugins = {};
+    }
+
+    window.plugins.toast = new Downloader();
+    return window.plugins.Downloader;
+};
+
+cordova.addConstructor(Downloader.install);

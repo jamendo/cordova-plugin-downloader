@@ -24,8 +24,8 @@
 
   <!-- js -->
   <js-module src="www/Downloader.js" name="Downloader">
-    <clobbers target="cordova.plugins" />
-    <clobbers target="plugins" />
+    <clobbers target="cordova.plugins.Downloader" />
+    <clobbers target="plugins.Downloader" />
   </js-module>
 
   <!-- android -->
