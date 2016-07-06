@@ -47,7 +47,7 @@
   <!-- ios -->
   <platform name="ios">
 
-    <source-file src="src/ios/BackgroundDownload.swift" />
+    <source-file src="src/ios/Downloader.swift" />
 
     <config-file target="config.xml" parent="/*">
       <feature name="Downloader">
