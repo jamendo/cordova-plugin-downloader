@@ -1,10 +1,6 @@
 var Downloader = {
     download: function (arguments, successCallback, errorCallback) {
-        console.group("Downloader::download");
-        console.log(arguments);
-        console.groupEnd();
-
-		cordova.exec(
+        cordova.exec(
 			successCallback,
 			errorCallback,
 			'Downloader',

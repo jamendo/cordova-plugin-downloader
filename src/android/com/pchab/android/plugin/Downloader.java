@@ -48,14 +48,14 @@ public class Downloader extends CordovaPlugin {
 
         Log.d(TAG, "CordovaPlugin: execute " + action);
 
-            if (ACTION_DOWNLOAD.equals(action)) {
+        if (ACTION_DOWNLOAD.equals(action)) {
 
-                Log.d(TAG, "CordovaPlugin: load " + action);
-                return download(args, callbackContext);
+            Log.d(TAG, "CordovaPlugin: load " + action);
+            return download(args, callbackContext);
 
-            }
+        }
 
-            return false;
+        return false;
 
 
     }    
