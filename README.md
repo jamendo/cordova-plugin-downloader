@@ -3,8 +3,8 @@ cordova plugin for downloading feature in jamendo music app.
 
 ```javascript
 var Downloader = window.plugins.Downloader;
-var downloadSuccessCallback = function (entry) {
-  //entry: { folder: string, file: string }
+var downloadSuccessCallback = function (folder) {
+  //folder: string where the file has been downloaded
 };
 var downloadErrorCallback = function (error) {
   //error: string
