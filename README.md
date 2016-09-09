@@ -19,3 +19,4 @@ Downloader.download({
 ```
 
 The ressource will be downloaded within the application's external files directory.
+WARNING: will overwrite existing file if it already exists.
