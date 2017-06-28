@@ -1,0 +1,36 @@
+{
+  "name": "cordova-plugin-downloader",
+  "version": "0.2.0",
+  "description": "Cordova plugin for downloading feature in jamendo music app",
+  "cordova": {
+    "id": "com.pchab.cordova.plugin.downloader",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FabianLauer/cordova-plugin-downloader.git"
+  },
+  "keywords": [
+    "music",
+    "download",
+    "mobile",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "Pierre Chabardes",
+  "license": "Apache 2.0 License",
+  "bugs": {
+    "url": "https://github.com/FabianLauer/cordova-plugin-downloader/issues"
+  },
+  "homepage": "https://github.com/FabianLauer/cordova-plugin-downloader#readme"
+}
