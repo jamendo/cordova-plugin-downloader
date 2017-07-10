@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FabianLauer/cordova-plugin-downloader.git"
+    "url": "git+https://github.com/jamendo/cordova-plugin-downloader.git"
   },
   "keywords": [
     "music",
@@ -30,7 +30,7 @@
   "author": "Pierre Chabardes",
   "license": "Apache 2.0 License",
   "bugs": {
-    "url": "https://github.com/FabianLauer/cordova-plugin-downloader/issues"
+    "url": "https://github.com/jamendo/cordova-plugin-downloader/issues"
   },
-  "homepage": "https://github.com/FabianLauer/cordova-plugin-downloader#readme"
+  "homepage": "https://github.com/jamendo/cordova-plugin-downloader#readme"
 }
