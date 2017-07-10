@@ -83,6 +83,8 @@ public class Downloader extends CordovaPlugin {
             request.setDescription("Jamendo Music");
             //Set the local destination for the downloaded file to a path within the application's external files directory
             request.setDestinationInExternalFilesDir(cordovaActivity, Environment.DIRECTORY_DOWNLOADS, path);
+            // Set the notification "visible notify completed" to stay the notification display at the end of the download
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
             // save the download
             downloadMap.put(downloadManager.enqueue(request), mDownload);
