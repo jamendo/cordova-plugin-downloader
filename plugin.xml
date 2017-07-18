@@ -9,7 +9,7 @@
 
   <description>Cordova plugin for downloading feature in jamendo music app</description>
 
-  <repo>https://github.com/pchab/cordova-plugin-downloader.git</repo>
+  <repo>https://github.com/jamendo/cordova-plugin-downloader.git</repo>
 
   <keywords>music, download, mobile</keywords>
 
