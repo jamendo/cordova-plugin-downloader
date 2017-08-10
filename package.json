@@ -1,9 +1,9 @@
 {
-  "name": "cordova-plugin-downloader",
-  "version": "0.2.0",
+  "name": "cordova-plugin-x-downloader",
+  "version": "0.2.1",
   "description": "Cordova plugin for downloading feature in jamendo music app",
   "cordova": {
-    "id": "com.pchab.cordova.plugin.downloader",
+    "id": "cordova-plugin-x-downloader",
     "platforms": [
       "android",
       "ios"

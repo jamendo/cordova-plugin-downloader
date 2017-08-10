@@ -2,8 +2,8 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="com.pchab.cordova.plugin.downloader"
-        version="0.1.0">
+        id="cordova-plugin-x-downloader"
+        version="0.2.1">
 
   <name>Downloader</name>
 
