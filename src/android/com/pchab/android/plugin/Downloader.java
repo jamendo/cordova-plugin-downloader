@@ -69,6 +69,12 @@ public class Downloader extends CordovaPlugin {
             JSONObject arg_object = args.getJSONObject(0);
             String path = arg_object.getString("path");
 
+            Boolean hideNotification = (
+                arg_object.has("hideNotification") 
+                    ? arg_object.getBoolean("hideNotification")
+                    : false
+            );
+
             Uri uri = Uri.parse(arg_object.getString("url"));
             Download mDownload = new Download(path, callbackContext);
 
@@ -84,7 +90,11 @@ public class Downloader extends CordovaPlugin {
             //Set the local destination for the downloaded file to a path within the application's external files directory
             request.setDestinationInExternalFilesDir(cordovaActivity, Environment.DIRECTORY_DOWNLOADS, path);
             // Set the notification "visible notify completed" to stay the notification display at the end of the download
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setNotificationVisibility(
+                hideNotification
+                    ? DownloadManager.Request.VISIBILITY_HIDDEN
+                    : DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
+            );
 
             // save the download
             downloadMap.put(downloadManager.enqueue(request), mDownload);

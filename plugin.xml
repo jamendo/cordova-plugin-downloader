@@ -30,6 +30,11 @@
   <!-- android -->
   <platform name="android">
 
+
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    </config-file>
+
     <!-- <source-file
       src="src/android/libs/support-v4-19.0.0.jar" target-dir="libs/" /> -->
     <source-file
