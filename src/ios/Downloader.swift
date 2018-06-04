@@ -9,6 +9,7 @@ import Foundation
         let args = command.arguments[0] as! NSDictionary
         let url = URL(string: args["url"] as! String)
         let targetFile = args["path"] as! String
+        let headers = args["headers"] != nil ? args["headers"] as! NSDictionary : nil
 
         let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL!
         let destinationUrl = documentsUrl?.appendingPathComponent(targetFile)
@@ -34,8 +35,16 @@ import Foundation
         let sessionConfig = URLSessionConfiguration.default
         sessionConfig.timeoutIntervalForRequest = 5.0
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
+        
+        if headers != nil {
+            for (headerName, headerValue) in headers! {
+                request.addValue(headerValue as! String, forHTTPHeaderField: headerName as! String)
+            }
+        }
+
         let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             if (error != nil) {
                 pluginResult = CDVPluginResult(
