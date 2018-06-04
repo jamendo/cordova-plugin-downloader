@@ -33,7 +33,7 @@ import Foundation
         }
 
         let sessionConfig = URLSessionConfiguration.default
-        sessionConfig.timeoutIntervalForRequest = 5.0
+        sessionConfig.timeoutIntervalForRequest = 90.0
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
 
         var request = URLRequest(url: url!)
