@@ -17,6 +17,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import java.util.HashMap;
 
 public class Downloader extends CordovaPlugin {
@@ -95,6 +96,18 @@ public class Downloader extends CordovaPlugin {
                     ? DownloadManager.Request.VISIBILITY_HIDDEN
                     : DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
             );
+
+            // Add headers to the request if necessary
+            if (arg_object.has("headers")) {
+                JSONObject headers = arg_object.getJSONObject("headers");
+                JSONArray headerNames = headers.names();
+
+                for (int i = 0; i < headerNames.length(); ++i) {
+                    String headerName = headerNames.getString(i);
+                    request.addRequestHeader(headerName, headers.getString(headerName));
+
+                }
+            }
 
             // save the download
             downloadMap.put(downloadManager.enqueue(request), mDownload);
