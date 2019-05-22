@@ -1,7 +1,7 @@
 import Foundation
 
 @objc(Downloader) class Downloader : CDVPlugin {
-    func download(_ command: CDVInvokedUrlCommand) {
+    @objc func download(_ command: CDVInvokedUrlCommand) {
         var pluginResult = CDVPluginResult(
             status: CDVCommandStatus_ERROR
         )
